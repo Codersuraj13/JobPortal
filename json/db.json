@@ -1,0 +1,198 @@
+{
+  "registration": [
+    {
+      "id": "f6a5",
+      "username": "Virat",
+      "password": "Virat@1234",
+      "email": "virat@gmail.com",
+      "mobile": "8966456347",
+      "type": "admin"
+    },
+    {
+      "id": "c9d7",
+      "username": "rohit",
+      "password": "Rohit@1234",
+      "email": "rohit@gmail.com",
+      "mobile": "8966456346",
+      "type": "candidate"
+    },
+    {
+      "id": "28ff",
+      "username": "Ram",
+      "password": "Ram@1234",
+      "email": "ram@gmail.com",
+      "mobile": "8966456345",
+      "type": "admin"
+    },
+    {
+      "id": "2f30",
+      "username": "omkar",
+      "password": "Omkar@1234",
+      "email": "omkar@gmail.com",
+      "mobile": "8966456344",
+      "type": "admin"
+    },
+    {
+      "id": "84c2",
+      "username": "vedant",
+      "password": "Vedant@1234",
+      "email": "Vedant@gmail.com",
+      "mobile": "8966456343",
+      "type": "candidate"
+    },
+    {
+      "id": "6c0c",
+      "username": "Rohit",
+      "password": "Rohit@9876",
+      "email": "Rohit98@gmail.com",
+      "mobile": "8966456342",
+      "type": "candidate"
+    },
+    {
+      "id": "88c4",
+      "username": "Saurav",
+      "password": "Saurav@1676",
+      "email": "Saurav@gmail.com",
+      "mobile": "8966456342",
+      "type": "admin"
+    },
+    {
+      "id": "a81c",
+      "username": "omkar kanerkar",
+      "password": "Omkar@123456",
+      "email": "Omkar12@gmail.com",
+      "mobile": "8945451465",
+      "type": "candidate"
+    },
+    {
+      "id": "2105",
+      "username": "Aditya Jamdade",
+      "password": "Aditya@123",
+      "email": "Aditya@gmail.com",
+      "mobile": "8966456340",
+      "type": "admin"
+    },
+    {
+      "id": "0063",
+      "username": "Ramesh",
+      "password": "Abc@1234",
+      "email": "abc12@gmail.com",
+      "mobile": "9898989898",
+      "type": "admin"
+    },
+    {
+      "id": "4200",
+      "username": "Aditya Jambale",
+      "password": "Aditya@5",
+      "email": "adityaj@gmail.com",
+      "mobile": "8966456346",
+      "type": "admin"
+    },
+    {
+      "id": "09f2",
+      "username": "rohit",
+      "password": "Virat@1234",
+      "email": "virat12@gmail.com",
+      "mobile": "8966456344",
+      "type": "admin"
+    },
+    {
+      "id": "8849",
+      "username": "omkar",
+      "password": "Omkar@123",
+      "email": "omkar12@gmail.com",
+      "mobile": "8966456342",
+      "type": "admin"
+    }
+  ],
+  "applications": [
+    {
+      "id": "911d",
+      "jobTitle": "Developer",
+      "companyName": "Infosys",
+      "location": "pune",
+      "experience": "3",
+      "appliedDate": "2025-04-16",
+      "linkedin": "https://www.linkedin.com/in/suraj"
+    },
+    {
+      "id": "c5d3",
+      "jobTitle": "Developer",
+      "companyName": "GreenEnergy",
+      "location": "mumbai",
+      "experience": "1",
+      "appliedDate": "2025-04-14",
+      "linkedin": "https://www.linkedin.com/in/suraj"
+    },
+    {
+      "id": "8053",
+      "jobTitle": "Senior Software Developer",
+      "companyName": "Infosys",
+      "location": "mumbai",
+      "experience": "3",
+      "appliedDate": "2025-04-18",
+      "linkedin": "https://www.linkedin.com/in/suraj"
+    },
+    {
+      "id": "547c",
+      "jobTitle": "Senior Software Developer",
+      "companyName": "GreenEnergy",
+      "location": "mumbai",
+      "experience": "1",
+      "appliedDate": "2025-04-18",
+      "linkedin": "https://www.linkedin.com/in/suraj"
+    },
+    {
+      "id": "acd5",
+      "jobTitle": "Software Developer",
+      "companyName": "GreenEnergy",
+      "location": "pune",
+      "experience": "1",
+      "appliedDate": "2025-04-09",
+      "linkedin": "https://www.linkedin.com/in/suraj"
+    },
+    {
+      "id": "b0c8",
+      "jobTitle": "Software Developer",
+      "companyName": "infosys",
+      "location": "Mumbai",
+      "experience": "3",
+      "appliedDate": "2025-04-18",
+      "linkedin": "https://www.linkedin.com/in/suraj"
+    }
+  ],
+  "vacancies": [
+    {
+      "id": "0c20",
+      "company": "infosys",
+      "role": "Software Developer",
+      "industry": "IT",
+      "description": "Specialization in Java SpringBoot",
+      "location": "Mumbai"
+    },
+    {
+      "id": "43be",
+      "company": "Capgemini",
+      "role": "Tester",
+      "industry": "IT",
+      "description": "Communication",
+      "location": "Chennai"
+    },
+    {
+      "id": "38d5",
+      "company": "tcs",
+      "role": "Software Developer",
+      "industry": "IT",
+      "description": "Specialization in Java",
+      "location": "mumbai"
+    },
+    {
+      "id": "ba2b",
+      "company": "LTIMindtree",
+      "role": "lead",
+      "industry": "IT",
+      "description": "Communication",
+      "location": "pune"
+    }
+  ]
+}

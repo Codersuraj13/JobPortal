@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quick Jobs Candidate</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Quick Jobs</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Home
+            <span class="visually-hidden">(current)</span>
+          </a>
+        </li>
+  
+        <li class="nav-item">
+          <a class="nav-link" href="#">Services</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-sm-2" type="search" placeholder="Search">
+        <button type="submit" class="btn btn-info my-2 my-sm-0">Search</button>
+      </form>
+     
+        <div class="dropdown ms-2">
+          <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown">
+            <i class="fa fa-user"></i> Login
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="/Job Portal Project/pages/log-in.html"><i class="fa fa-sign-in-alt me-2"></i>Log In</a></li>
+            <li><a class="dropdown-item" href="job-seeker-registration.html"><i class="fa fa-user-plus me-2"></i>Sign Up</a></li>
+          </ul>
+        </div>
+        
+      </div>
+      
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item" href="#">Profile</a></li>
+          <li><a class="dropdown-item" href="#">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+<div class="d-flex">
+  <!-- Sidebar -->
+  <div class="bg-dark text-white sidebar p-3" style="width: 250px; min-height: 100vh;">
+    <h5 class="text-white mb-3">Navigation</h5>
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a href="#" class="nav-link text-white" onclick="loadPage('candidate-dashboard.html')">
+          <i class="fa fa-chart-line me-2"></i> Dashboard
+        </a>
+      </li>
+       
+      <a class="nav-link text-white " data-bs-toggle="collapse" href="#queries" onclick="loadPage('jobs.html')">
+        <i class="fa fa-paper-plane me-2"></i> Search Jobs
+      </a>
+       <!-- Master Form Section -->
+      <a class="nav-link text-white " data-bs-toggle="collapse" href="#queries" onclick="loadPage('job-applications.html')">
+        <i class="fa fa-database me-2"></i> Job Applications
+      </a>
+
+      
+      <div class="nav-item">
+        <a class="nav-link text-white " href="#">
+          <a href="#" class="nav-link text-white" onclick="loadPage('apply-for-job.html')"><i class="fa fa-paper-plane me-2"></i></i> Apply for Job</a>
+        </a>
+       </div>
+    
+     
+      
+      <li class="nav-item">
+        <a class="nav-link text-white dropdown-toggle" data-bs-toggle="collapse" href="#charts">
+          <i class="fa fa-chart-pie me-2"></i> Analytics
+        </a>
+        <div class="collapse" id="charts">
+          <ul class="nav flex-column ms-3">
+            
+            <li><a href="#" class="nav-link text-white" onclick="loadPage('application-performance.html')">Application Performance </a></li>
+          </ul>
+        </div>
+      </li>
+      <a class="nav-link text-white " data-bs-toggle="collapse" href="#charts">
+        <a href="#" class="nav-link text-white" onclick="loadPage('FAQs.html')"><i class="fa-solid fa-circle-question"></i> FAQs</a>
+      </a>
+      <li class="nav-item">
+        <a class="nav-link text-white"  href="#menu2">
+          <i class="fa fa-cog me-2"></i> Profile
+        </a>
+      </li>
+    </ul>
+    <div class="logout">
+        <a href="/pages/login.html" class="nav-link text-white">
+          <i class="fa fa-sign-out-alt me-2 "></i> Logout
+        </a>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+<div class="p-4" style="flex: 1; overflow-y: auto;" id="main-content">
+  <h2 class="mb-4">Welcome, Candidate!</h2>
+
+  <div class="row g-4">
+    <!-- Jobs Applied -->
+    <div class="col-md-4">
+      <div class="card shadow-sm p-3 border-start border-primary border-4">
+        <div class="d-flex align-items-center">
+          <i class="fa fa-briefcase text-primary fs-3 me-3"></i>
+          <div>
+            <h5 class="mb-0">12</h5>
+            <small>Jobs Applied</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Saved Jobs -->
+    <div class="col-md-4">
+      <div class="card shadow-sm p-3 border-start border-warning border-4">
+        <div class="d-flex align-items-center">
+          <i class="fa fa-star text-warning fs-3 me-3"></i>
+          <div>
+            <h5 class="mb-0">5</h5>
+            <small>Saved Jobs</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Profile Completion -->
+    <div class="col-md-4">
+      <div class="card shadow-sm p-3 border-start border-success border-4">
+        <div class="d-flex align-items-center">
+          <i class="fa fa-user-check text-success fs-3 me-3"></i>
+          <div>
+            <h5 class="mb-0">80%</h5>
+            <small>Profile Complete</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interview Calls -->
+    <div class="col-md-4">
+      <div class="card shadow-sm p-3 border-start border-info border-4">
+        <div class="d-flex align-items-center">
+          <i class="fa fa-phone-alt text-info fs-3 me-3"></i>
+          <div>
+            <h5 class="mb-0">3</h5>
+            <small>Interview Calls</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Resume Downloads -->
+    <div class="col-md-4">
+      <div class="card shadow-sm p-3 border-start border-danger border-4">
+        <div class="d-flex align-items-center">
+          <i class="fa fa-file-download text-danger fs-3 me-3"></i>
+          <div>
+            <h5 class="mb-0">7</h5>
+            <small>Resume Downloads</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notifications -->
+    <div class="col-md-4">
+      <div class="card shadow-sm p-3 border-start border-secondary border-4">
+        <div class="d-flex align-items-center">
+          <i class="fa fa-bell text-secondary fs-3 me-3"></i>
+          <div>
+            <h5 class="mb-0">4</h5>
+            <small>New Notifications</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="mt-5">
+    <h5>Quick Tips to Get Hired:</h5>
+    <ul class="list-group">
+      <li class="list-group-item"><i class="fa fa-check-circle text-success me-2"></i> Keep your profile updated regularly.</li>
+      <li class="list-group-item"><i class="fa fa-check-circle text-success me-2"></i> Apply to jobs that match your skills.</li>
+      <li class="list-group-item"><i class="fa fa-check-circle text-success me-2"></i> Turn on job alerts to never miss an opportunity.</li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- Footer -->
+<footer class="bg-dark text-white text-center py-3 fixed-bottom">
+  &copy; 2025 Candidate Dashboard. All rights reserved.
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script >
+  function loadPage(page) {
+    fetch(`pages/${page}`)
+        .then(response => response.text())
+        .then(data => {
+            const container = document.getElementById('main-content');
+            container.innerHTML = data;
+
+           
+            const scripts = container.querySelectorAll('script');
+            scripts.forEach(script => {
+                const newScript = document.createElement('script');
+                if (script.src) {
+                    newScript.src = script.src;
+                } else {
+                    newScript.textContent = script.textContent;
+                }
+                document.body.appendChild(newScript);
+                script.remove(); 
+            });
+        })
+        .catch(err => {
+            document.getElementById('main-content').innerHTML =
+                '<p class="text-danger">Failed to load content.</p>';
+            console.error(err);
+        });
+}
+
+
+</script>
+</body>
+</html>

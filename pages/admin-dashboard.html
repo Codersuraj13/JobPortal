@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+  <div class="p-4" style="flex: 1;" id="main-content">
+    <h2 class="mb-4">Welcome to Admin Dashboard</h2>
+
+    <div class="row g-4">
+      <!-- Total Jobs Card -->
+      <div class="col-md-4">
+        <div class="card text-white bg-success shadow-sm">
+          <div class="card-body d-flex align-items-center justify-content-between">
+            <div>
+              <h5 class="card-title">Total Job Posts</h5>
+              <h3 id="totalJobs">0</h3>
+            </div>
+            <i class="fa fa-briefcase fa-3x"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Total Applicants Card -->
+      <div class="col-md-4">
+        <div class="card text-white bg-info shadow-sm">
+          <div class="card-body d-flex align-items-center justify-content-between">
+            <div>
+              <h5 class="card-title">Total Applicants</h5>
+              <h3 id="totalApplicants">0</h3>
+            </div>
+            <i class="fa fa-users fa-3x"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Positions Filled Card -->
+      <div class="col-md-4">
+        <div class="card text-white bg-warning shadow-sm">
+          <div class="card-body d-flex align-items-center justify-content-between">
+            <div>
+              <h5 class="card-title">Positions Filled</h5>
+              <h3 id="positionsFilled">0</h3>
+            </div>
+            <i class="fa fa-user-check fa-3x"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Analytics Section -->
+      <div class="col-md-12">
+        <div class="card shadow-sm">
+          <div class="card-header bg-primary text-white">
+            <i class="fa fa-chart-bar me-2"></i> Job Applications Overview
+          </div>
+          <div class="card-body">
+            <p>This section shows the analytics of applications received for different job roles.</p>
+            <div class="text-center text-muted py-5">
+              <em>[Chart Placeholder - e.g., Applications by Role]</em>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript to fetch and update data -->
+  <script>
+    async function updateDashboard() {
+      try {
+        const [vacanciesRes, applicationsRes] = await Promise.all([
+          fetch('http://localhost:3000/vacancies'),
+          fetch('http://localhost:3000/applications')
+        ]);
+
+        const vacancies = await vacanciesRes.json();
+        const applications = await applicationsRes.json();
+
+        document.getElementById('totalJobs').textContent = vacancies.length;
+        document.getElementById('totalApplicants').textContent = applications.length;
+
+        // For now, Positions Filled = totalApplications / 2 as dummy logic
+        const filled = Math.floor(applications.length / 2); 
+        document.getElementById('positionsFilled').textContent = filled;
+
+      } catch (error) {
+        console.error("Error loading dashboard data:", error);
+      }
+    }
+
+    updateDashboard();
+  </script>
+</body>
+</html>

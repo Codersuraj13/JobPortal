@@ -36,7 +36,7 @@
       "id": "84c2",
       "username": "vedant",
       "password": "Vedant@1234",
-      "email": "Vedant@gmail.com",
+      "email": "vedant@gmail.com",
       "mobile": "8966456343",
       "type": "candidate"
     },
@@ -103,20 +103,17 @@
       "email": "omkar12@gmail.com",
       "mobile": "8966456342",
       "type": "admin"
+    },
+    {
+      "id": "fbf6",
+      "username": "Pratik",
+      "password": "Pratik@123",
+      "email": "pratik@gmail.com",
+      "mobile": "8966456342",
+      "type": "admin"
     }
   ],
   "applications": [
-    {
-      "id": "ea2b",
-      "candidateName": "Ram",
-      "email": "ram@gmail.com",
-      "jobTitle": "Software Developer",
-      "companyName": "Google",
-      "location": "Mumbai",
-      "experience": "3",
-      "appliedDate": "2025-04-18",
-      "linkedin": "https://www.linkedin.com/in/suraj"
-    },
     {
       "id": "5069",
       "candidateName": "Rohit",
@@ -126,18 +123,8 @@
       "location": "Mumbai",
       "experience": "1",
       "appliedDate": "2025-04-18",
-      "linkedin": "https://www.linkedin.com/in/suraj"
-    },
-    {
-      "id": "0ae6",
-      "candidateName": "Sagar",
-      "email": "sagar@gmail.com",
-      "jobTitle": "Tester",
-      "companyName": "Capgemini",
-      "location": "Chennai",
-      "experience": "4",
-      "appliedDate": "2025-04-18",
-      "linkedin": "https://www.linkedin.com/in/suraj"
+      "linkedin": "https://www.linkedin.com/in/suraj",
+      "status": "Accepted"
     },
     {
       "id": "122b",
@@ -148,7 +135,20 @@
       "location": "pune",
       "experience": "3",
       "appliedDate": "2025-04-18",
-      "linkedin": "https://www.linkedin.com/in/suraj"
+      "linkedin": "https://www.linkedin.com/in/suraj",
+      "status": "Rejected"
+    },
+    {
+      "id": "35be",
+      "candidateName": "Vedant",
+      "email": "vedant@gmail.com",
+      "jobTitle": "Devops",
+      "companyName": "Google",
+      "location": "Bhigwan",
+      "experience": "3",
+      "appliedDate": "2025-04-19",
+      "linkedin": "https://www.linkedin.com/in/suraj",
+      "status": "Accepted"
     }
   ],
   "vacancies": [
@@ -183,6 +183,39 @@
       "industry": "IT",
       "description": "Communication",
       "location": "pune"
+    },
+    {
+      "id": "3069",
+      "company": "Google",
+      "role": "Devops",
+      "industry": "IT",
+      "description": "Specialization in Java SpringBoot",
+      "location": "Bhigwan"
     }
-  ]
+  ],
+  "accepted": [
+    {
+      "id": "ea2b",
+      "candidateName": "Ram",
+      "email": "ram@gmail.com",
+      "jobTitle": "Software Developer",
+      "companyName": "Google",
+      "location": "Mumbai",
+      "experience": "3",
+      "appliedDate": "2025-04-18",
+      "linkedin": "https://www.linkedin.com/in/suraj"
+    },
+    {
+      "id": "0ae6",
+      "candidateName": "Sagar",
+      "email": "sagar@gmail.com",
+      "jobTitle": "Tester",
+      "companyName": "Capgemini",
+      "location": "Chennai",
+      "experience": "4",
+      "appliedDate": "2025-04-18",
+      "linkedin": "https://www.linkedin.com/in/suraj"
+    }
+  ],
+  "rejected": []
 }

@@ -1,221 +1,97 @@
 {
   "registration": [
     {
-      "id": "f6a5",
-      "username": "Virat",
-      "password": "Virat@1234",
-      "email": "virat@gmail.com",
+      "id": "d7ea",
+      "username": "rohit",
+      "password": "Rohit@1234",
+      "email": "rohit@gmail.com",
+      "mobile": "9422107004",
+      "type": "candidate"
+    },
+    {
+      "id": "7149",
+      "username": "Ramaa",
+      "password": "Ram@1234",
+      "email": "ram@gmail.com",
       "mobile": "8966456347",
       "type": "admin"
     },
     {
-      "id": "c9d7",
-      "username": "rohit",
-      "password": "Rohit@1234",
-      "email": "rohit@gmail.com",
-      "mobile": "8966456346",
-      "type": "candidate"
-    },
-    {
-      "id": "28ff",
-      "username": "Ram",
-      "password": "Ram@1234",
-      "email": "ram@gmail.com",
-      "mobile": "8966456345",
-      "type": "admin"
-    },
-    {
-      "id": "2f30",
+      "id": "624a",
       "username": "omkar",
       "password": "Omkar@1234",
       "email": "omkar@gmail.com",
-      "mobile": "8966456344",
-      "type": "admin"
-    },
-    {
-      "id": "84c2",
-      "username": "vedant",
-      "password": "Vedant@1234",
-      "email": "vedant@gmail.com",
-      "mobile": "8966456343",
-      "type": "candidate"
-    },
-    {
-      "id": "6c0c",
-      "username": "Rohit",
-      "password": "Rohit@9876",
-      "email": "Rohit98@gmail.com",
       "mobile": "8966456342",
       "type": "candidate"
-    },
-    {
-      "id": "88c4",
-      "username": "Saurav",
-      "password": "Saurav@1676",
-      "email": "Saurav@gmail.com",
-      "mobile": "8966456342",
-      "type": "admin"
-    },
-    {
-      "id": "a81c",
-      "username": "omkar kanerkar",
-      "password": "Omkar@123456",
-      "email": "Omkar12@gmail.com",
-      "mobile": "8945451465",
-      "type": "candidate"
-    },
-    {
-      "id": "2105",
-      "username": "Aditya Jamdade",
-      "password": "Aditya@123",
-      "email": "Aditya@gmail.com",
-      "mobile": "8966456340",
-      "type": "admin"
-    },
-    {
-      "id": "0063",
-      "username": "Ramesh",
-      "password": "Abc@1234",
-      "email": "abc12@gmail.com",
-      "mobile": "9898989898",
-      "type": "admin"
-    },
-    {
-      "id": "4200",
-      "username": "Aditya Jambale",
-      "password": "Aditya@5",
-      "email": "adityaj@gmail.com",
-      "mobile": "8966456346",
-      "type": "admin"
-    },
-    {
-      "id": "09f2",
-      "username": "rohit",
-      "password": "Virat@1234",
-      "email": "virat12@gmail.com",
-      "mobile": "8966456344",
-      "type": "admin"
-    },
-    {
-      "id": "8849",
-      "username": "omkar",
-      "password": "Omkar@123",
-      "email": "omkar12@gmail.com",
-      "mobile": "8966456342",
-      "type": "admin"
-    },
-    {
-      "id": "fbf6",
-      "username": "Pratik",
-      "password": "Pratik@123",
-      "email": "pratik@gmail.com",
-      "mobile": "8966456342",
-      "type": "admin"
     }
   ],
   "applications": [
     {
-      "id": "5069",
-      "candidateName": "Rohit",
+      "id": "96cd",
+      "candidateName": "rohit",
       "email": "rohit@gmail.com",
       "jobTitle": "Software Developer",
       "companyName": "infosys",
       "location": "Mumbai",
       "experience": "1",
-      "appliedDate": "2025-04-18",
+      "appliedDate": "2025-04-21",
       "linkedin": "https://www.linkedin.com/in/suraj",
       "status": "Accepted"
     },
     {
-      "id": "122b",
-      "candidateName": "Virat",
-      "email": "virat@gmail.com",
-      "jobTitle": "lead",
-      "companyName": "LTIMindtree",
-      "location": "pune",
+      "id": "1df4",
+      "candidateName": "omkar",
+      "email": "omkar@gmail.com",
+      "jobTitle": "Software Developer",
+      "companyName": "uber",
+      "location": "Mumbai",
       "experience": "3",
-      "appliedDate": "2025-04-18",
+      "appliedDate": "2025-04-08",
       "linkedin": "https://www.linkedin.com/in/suraj",
       "status": "Rejected"
     },
     {
-      "id": "35be",
-      "candidateName": "Vedant",
-      "email": "vedant@gmail.com",
-      "jobTitle": "Devops",
-      "companyName": "Google",
-      "location": "Bhigwan",
+      "id": "92d9",
+      "candidateName": "omkar",
+      "email": "omkar@gmail.com",
+      "jobTitle": "Software Developer",
+      "companyName": "theri",
+      "location": "Mumbai",
       "experience": "3",
-      "appliedDate": "2025-04-19",
+      "appliedDate": "2025-04-15",
       "linkedin": "https://www.linkedin.com/in/suraj",
       "status": "Accepted"
+    },
+    {
+      "id": "aac0",
+      "candidateName": "Rohit",
+      "email": "rohit@gmail.com",
+      "jobTitle": "Frontend Developer",
+      "companyName": "tcs",
+      "location": "Bangalore",
+      "experience": "3",
+      "appliedDate": "2025-04-14",
+      "linkedin": "https://www.linkedin.com/in/suraj"
     }
   ],
   "vacancies": [
     {
-      "id": "0c20",
+      "id": "075d",
       "company": "infosys",
       "role": "Software Developer",
-      "industry": "IT",
-      "description": "Specialization in Java SpringBoot",
+      "industry": "Information Technology",
+      "description": "Specialization in Java",
       "location": "Mumbai"
     },
     {
-      "id": "43be",
+      "id": "4573",
       "company": "Capgemini",
-      "role": "Tester",
-      "industry": "IT",
-      "description": "Communication",
-      "location": "Chennai"
-    },
-    {
-      "id": "38d5",
-      "company": "tcs",
-      "role": "Software Developer",
-      "industry": "IT",
+      "role": "Frontend Developer",
+      "industry": "Information Technology",
       "description": "Specialization in Java",
-      "location": "mumbai"
-    },
-    {
-      "id": "ba2b",
-      "company": "LTIMindtree",
-      "role": "lead",
-      "industry": "IT",
-      "description": "Communication",
-      "location": "pune"
-    },
-    {
-      "id": "3069",
-      "company": "Google",
-      "role": "Devops",
-      "industry": "IT",
-      "description": "Specialization in Java SpringBoot",
-      "location": "Bhigwan"
+      "location": "Bangalore"
     }
   ],
-  "accepted": [
-    {
-      "id": "ea2b",
-      "candidateName": "Ram",
-      "email": "ram@gmail.com",
-      "jobTitle": "Software Developer",
-      "companyName": "Google",
-      "location": "Mumbai",
-      "experience": "3",
-      "appliedDate": "2025-04-18",
-      "linkedin": "https://www.linkedin.com/in/suraj"
-    },
-    {
-      "id": "0ae6",
-      "candidateName": "Sagar",
-      "email": "sagar@gmail.com",
-      "jobTitle": "Tester",
-      "companyName": "Capgemini",
-      "location": "Chennai",
-      "experience": "4",
-      "appliedDate": "2025-04-18",
-      "linkedin": "https://www.linkedin.com/in/suraj"
-    }
-  ],
+  "accepted": [],
   "rejected": []
 }

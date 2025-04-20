@@ -26,6 +26,19 @@
         class="p-4 shadow-sm border rounded bg-light"
         novalidate
       >
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="candidateName" class="form-label">Candidate Name</label>
+          <input type="text" class="form-control" id="candidateName" required />
+          <div class="invalid-feedback">Please enter your name.</div>
+        </div>
+        <div class="col-md-6">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" id="email" required />
+          <div class="invalid-feedback">Please enter a valid email.</div>
+        </div>
+      </div>
+      
         <div class="row mb-3">
           <div class="col-md-6">
             <label for="jobTitle" class="form-label">Job Title</label>
@@ -83,6 +96,8 @@
         const apiUrl = "http://localhost:3000/applications";
         const form = document.getElementById("jobForm");
 
+        const candidateNameInput = document.getElementById("candidateName");
+        const emailInput = document.getElementById("email");
         const jobTitleInput = document.getElementById("jobTitle");
         const companyNameInput = document.getElementById("companyName");
         const locationInput = document.getElementById("location");
@@ -113,6 +128,8 @@
         function validateForm() {
           let isValid = true;
           const inputs = [
+            candidateNameInput,
+            emailInput,
             jobTitleInput,
             companyNameInput,
             locationInput,
@@ -139,6 +156,12 @@
             console.warn("LinkedIn URL invalid:", linkedinInput.value);
             isValid = false;
           }
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(emailInput.value.trim())) {
+          emailInput.classList.add("is-invalid");
+          isValid = false;
+           }
+
 
           return isValid;
         }
@@ -153,6 +176,8 @@
           }
 
           const application = {
+            candidateName: candidateNameInput.value.trim(),
+            email: emailInput.value.trim(),
             jobTitle: jobTitleInput.value.trim(),
             companyName: companyNameInput.value.trim(),
             location: locationInput.value.trim(),

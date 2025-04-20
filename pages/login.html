@@ -75,9 +75,14 @@
         .then(users => {
           const user = users.find(u => u.email === email && u.password === password);
           if (user) {
-            sessionStorage.setItem("userId", user.userId);
-            sessionStorage.setItem("userName", user.name);
-            sessionStorage.setItem("userType", user.type);
+            // Storing the logged-in user data in sessionStorage
+            sessionStorage.setItem("loggedInCandidate", JSON.stringify({
+              name: user.name,
+              email: user.email,
+              type: user.type
+            }));
+
+            // Redirect based on user type
             if (user.type === "admin") {
               window.location.href = "/Admin.html";
             } else {
@@ -90,12 +95,6 @@
         .catch(err => {
           console.error("Error fetching users:", err);
         });
-    }
-
-    function logout() {
-      sessionStorage.clear();
-      sessionStorage.setItem("loggedOut", "true");
-      window.location.href = "login.html";
     }
   </script>
 </body>

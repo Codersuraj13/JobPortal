@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Job-wise Applicant List | Quick Jobs</title>
-  <!-- Flatly theme from Bootswatch -->
   <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/flatly/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
 
@@ -56,19 +55,19 @@
       border-radius: 20px;
     }
 
+    .action-buttons .btn {
+      margin-right: 6px;
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 0.85rem;
+    }
+
     footer {
       background-color: #2c3e50;
       color: white;
       text-align: center;
       padding: 12px 0;
       margin-top: 40px;
-    }
-
-    .action-buttons .btn {
-      margin-right: 6px;
-      border-radius: 20px;
-      padding: 4px 14px;
-      font-size: 0.85rem;
     }
   </style>
 </head>
@@ -82,10 +81,10 @@
     <label for="jobSelect" class="form-label">Select Job Title:</label>
     <select class="form-select" id="jobSelect">
       <option selected disabled>-- Choose a Job --</option>
-      <option value="1">Software Developer</option>
-      <option value="2">Frontend Engineer</option>
-      <option value="3">Data Analyst</option>
-      <option value="4">Marketing Executive</option>
+      <option value="Software Developer">Software Developer</option>
+      <option value="Frontend Engineer">Frontend Engineer</option>
+      <option value="Data Analyst">Data Analyst</option>
+      <option value="Marketing Executive">Marketing Executive</option>
     </select>
   </div>
 
@@ -94,62 +93,112 @@
     <table class="table table-hover align-middle">
       <thead>
         <tr>
-          <th scope="col">#</th>
+          <th>#</th>
           <th>Candidate Name</th>
           <th>Email</th>
           <th>Applied Date</th>
           <th>Job Title</th>
-          <th>Action</th>
+          <th>Status</th>
+          <th class="text-center" style="width: 250px;">Actions</th>    
         </tr>
       </thead>
       <tbody id="applicantTable">
-        <tr>
-          <td>1</td>
-          <td>Ravi Mehra</td>
-          <td>ravi.mehra@example.com</td>
-          <td>2025-04-09</td>
-          <td>Software Developer</td>
-          <td class="action-buttons">
-            <button class="btn btn-success btn-sm" onclick="handleAction(this, 'Accepted')"><i class="fa fa-check"></i> Accept</button>
-            <button class="btn btn-danger btn-sm" onclick="handleAction(this, 'Rejected')"><i class="fa fa-times"></i> Reject</button>
-          </td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Priya Deshmukh</td>
-          <td>priya.d@example.com</td>
-          <td>2025-04-10</td>
-          <td>Frontend Engineer</td>
-          <td class="action-buttons">
-            <button class="btn btn-success btn-sm" onclick="handleAction(this, 'Accepted')"><i class="fa fa-check"></i> Accept</button>
-            <button class="btn btn-danger btn-sm" onclick="handleAction(this, 'Rejected')"><i class="fa fa-times"></i> Reject</button>
-          </td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>Akshay Patil</td>
-          <td>akshayp@example.com</td>
-          <td>2025-04-11</td>
-          <td>Data Analyst</td>
-          <td class="action-buttons">
-            <button class="btn btn-success btn-sm" onclick="handleAction(this, 'Accepted')"><i class="fa fa-check"></i> Accept</button>
-            <button class="btn btn-danger btn-sm" onclick="handleAction(this, 'Rejected')"><i class="fa fa-times"></i> Reject</button>
-          </td>
-        </tr>
+        <!-- Applicants will be dynamically added here -->
       </tbody>
     </table>
   </div>
 </div>
 
 <script>
-  function handleAction(button, status) {
-    const cell = button.closest('td');
-    cell.innerHTML = status === 'Accepted'
+ // (function () {
+  const applicantTable = document.getElementById("applicantTable");
+  const jobSelect = document.getElementById("jobSelect");
+
+  // Fetch and display applicants
+  async function loadApplicants(jobFilter = "") {
+    try {
+      const res = await fetch("http://localhost:3000/applications");
+      const data = await res.json();
+
+      applicantTable.innerHTML = "";
+      let count = 1;
+
+      const filteredData = jobFilter
+        ? data.filter(app => app.jobTitle === jobFilter)
+        : data;
+
+      filteredData.forEach(app => {
+        const statusBadge = app.status === 'Accepted'
+          ? '<span class="badge bg-success">Accepted</span>'
+          : app.status === 'Rejected'
+          ? '<span class="badge bg-danger">Rejected</span>'
+          : '<span class="badge bg-warning">Pending</span>';
+
+        const row = `
+          <tr>
+            <td>${count++}</td>
+            <td>${app.candidateName}</td>
+            <td>${app.email}</td>
+            <td>${app.appliedDate}</td>
+            <td>${app.jobTitle}</td>
+            <td class="status-cell">${statusBadge}</td>
+            <td class="text-center action-buttons">
+              <button class="btn btn-success btn-sm" onclick="handleAction(this, 'Accepted', '${app.id}')">
+                <i class="fa fa-check"></i> Accept
+              </button>
+              <button class="btn btn-danger btn-sm" onclick="handleAction(this, 'Rejected', '${app.id}')">
+                <i class="fa fa-times"></i> Reject
+              </button>
+            </td>
+          </tr>
+        `;
+        applicantTable.insertAdjacentHTML("beforeend", row);
+      });
+    } catch (err) {
+      console.error("Error fetching data:", err);
+    }
+  }
+
+  // Filter on dropdown change
+  jobSelect.addEventListener("change", () => {
+    const selectedJob = jobSelect.value;
+    loadApplicants(selectedJob);
+  });
+
+  // Handle Accept/Reject button
+  function handleAction(button, status, applicationId) {
+    const row = button.closest("tr");
+    const statusCell = row.querySelector(".status-cell");
+
+    const statusBadge = status === "Accepted"
       ? '<span class="badge bg-success">Accepted</span>'
       : '<span class="badge bg-danger">Rejected</span>';
+
+    // Update badge
+    statusCell.innerHTML = statusBadge;
+
+    // Update database
+    fetch(`http://localhost:3000/applications/${applicationId}`)
+      .then(res => res.json())
+      .then(app => {
+        app.status = status;
+
+        return fetch(`http://localhost:3000/applications/${applicationId}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(app)
+        });
+      })
+      .then(res => res.json())
+      .then(updated => console.log("Status updated:", updated))
+      .catch(err => console.error("Error updating status:", err));
   }
+
+  // Initial load
+  loadApplicants();
+//})();
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> -->
 </body>
 </html>

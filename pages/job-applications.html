@@ -71,6 +71,7 @@
                 <th>Job Title</th>
                 <th>Company</th>
                 <th>Applied On</th>
+                <th>Status</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -102,7 +103,7 @@
     </div>
 
     <script>
-     // (function () {
+//(function () {
         let applicationsData = [];
 
         async function fetchApplications() {
@@ -121,12 +122,24 @@
           const total = document.getElementById("totalApplications");
           tbody.innerHTML = "";
           applications.forEach((app, index) => {
+            const status = app.status ? app.status : "Pending";
             const row = `
           <tr>
             <td>${index + 1}</td>
             <td>${app.jobTitle}</td>
             <td>${app.companyName}</td>
             <td>${app.appliedDate}</td>
+            <td>
+             <span class="badge ${
+             status === "Accepted"
+              ? "bg-success"
+              : status === "Rejected"
+              ? "bg-danger"
+             : "bg-warning"
+            }">
+           ${status}
+          </span>
+          </td>
             <td>
               <button class="btn btn-sm btn-outline-danger" onclick="deleteApplication('${
                 app.id
@@ -170,7 +183,7 @@
 
         // Initial Load
         fetchApplications();
-     // })();
+      //})();
     </script>
   </body>
 </html>

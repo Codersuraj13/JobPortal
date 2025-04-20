@@ -70,7 +70,7 @@
     </div>
   </div>
 
-  <!-- JavaScript to fetch and update data -->
+  
   <script>
     async function updateDashboard() {
       try {
@@ -78,23 +78,24 @@
           fetch('http://localhost:3000/vacancies'),
           fetch('http://localhost:3000/applications')
         ]);
-
+  
         const vacancies = await vacanciesRes.json();
         const applications = await applicationsRes.json();
-
+  
         document.getElementById('totalJobs').textContent = vacancies.length;
         document.getElementById('totalApplicants').textContent = applications.length;
-
-        // For now, Positions Filled = totalApplications / 2 as dummy logic
-        const filled = Math.floor(applications.length / 2); 
+  
+        
+        const filled = applications.filter(app => app.status === "Accepted").length;
         document.getElementById('positionsFilled').textContent = filled;
-
+  
       } catch (error) {
         console.error("Error loading dashboard data:", error);
       }
     }
-
+  
     updateDashboard();
   </script>
+  
 </body>
 </html>

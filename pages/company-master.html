@@ -15,7 +15,7 @@
     <form id="companyForm">
       <div class="mb-3">
         <label for="company" class="form-label">Enter Company Name</label>
-        <input type="text" id="company"  class="form-control" required />
+        <input type="text" id="company" class="form-control" required />
       </div>
       <div class="mb-3">
         <label for="role" class="form-label">Enter Role</label>
@@ -23,7 +23,17 @@
       </div>
       <div class="mb-3">
         <label for="industry" class="form-label">Industry</label>
-        <input type="text" class="form-control" id="industry" name="industry" required />
+        <select class="form-select" id="industry" name="industry" required>
+          <option value="" disabled selected>Select Industry</option>
+          <option value="Information Technology">Information Technology</option>
+          <option value="Manufacturing">Manufacturing</option>
+          <option value="Healthcare">Healthcare</option>
+          <option value="Education">Education</option>
+          <option value="Finance">Finance</option>
+          <option value="Retail">Retail</option>
+          <option value="Automotive">Automotive</option>
+          <option value="Telecommunications">Telecommunications</option>
+        </select>
       </div>
       <div class="mb-3">
         <label for="description" class="form-label">Role Description</label>
@@ -31,7 +41,16 @@
       </div>
       <div class="mb-3">
         <label for="location" class="form-label">Location</label>
-        <input type="text" class="form-control" id="location" name="location" required />
+        <select class="form-select" id="location" name="location" required>
+          <option value="" disabled selected>Select Location</option>
+          <option value="Mumbai">Mumbai</option>
+          <option value="Pune">Pune</option>
+          <option value="Hyderabad">Hyderabad</option>
+          <option value="Bangalore">Bangalore</option>
+          <option value="Chennai">Chennai</option>
+          <option value="Ahmedabad">Ahmedabad</option>
+          <option value="Gurgaon">Gurgaon</option>
+        </select>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
@@ -42,7 +61,7 @@
     <table class="table table-bordered">
       <thead class="table-light">
         <tr>
-         <th>Company</th>
+          <th>Company</th>
           <th>Role</th>
           <th>Industry</th>
           <th>Description</th>
@@ -51,100 +70,80 @@
         </tr>
       </thead>
       <tbody id="companyTableBody">
-        
       </tbody>
     </table>
   </div>
 
   <script>
-    (
-      function(){
-        const form = document.getElementById('companyForm');
-    const tableBody = document.getElementById('companyTableBody');
-    const API_URL = 'http://localhost:3000/vacancies';
+    (function () {
+      const form = document.getElementById('companyForm');
+      const tableBody = document.getElementById('companyTableBody');
+      const API_URL = 'http://localhost:3000/vacancies';
 
-   
-    
+      function loadVacancies() {
+        fetch(API_URL)
+          .then(res => {
+            if (!res.ok) throw new Error('Failed to fetch vacancies');
+            return res.json();
+          })
+          .then(data => {
+            tableBody.innerHTML = '';
+            data.forEach(item => {
+              let row = document.createElement('tr');
+              row.innerHTML = `
+                <td>${item.company}</td>
+                <td>${item.role}</td>
+                <td>${item.industry}</td>
+                <td>${item.description}</td>
+                <td>${item.location}</td>
+                <td><button type="button" class="btn btn-sm btn-danger" onclick="deleteVacancy('${item.id}', this)">Delete</button></td>
+              `;
+              tableBody.appendChild(row);
+            });
+          })
+          .catch(error => console.error('Error loading vacancies:', error));
+      }
 
-    function loadVacancies() {
-      fetch(API_URL)
-        .then(res => {
-          if (!res.ok) throw new Error('Failed to fetch vacancies');
-          return res.json();
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const vacancy = {
+          company: document.getElementById('company').value.trim(),
+          role: document.getElementById('role').value.trim(),
+          industry: document.getElementById('industry').value,
+          description: document.getElementById('description').value.trim(),
+          location: document.getElementById('location').value
+        };
+
+        fetch(API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(vacancy)
         })
-        .then(data => {
-          tableBody.innerHTML = '';
-          data.forEach(item => {
-            let row = document.createElement('tr');
-            row.innerHTML = `
-        <td>${item.company}</td>
-        <td>${item.role}</td>
-        <td>${item.industry}</td>
-        <td>${item.description}</td>
-        <td>${item.location}</td>
-        <td><button type="button" class="btn btn-sm btn-danger" onclick="deleteVacancy('${item.id}', this)">Delete</button></td>
+          .then(res => {
+            if (!res.ok) throw new Error('Failed to save vacancy');
+            return res.json();
+          })
+          .then(data => {
+            form.reset();
+            loadVacancies();
+          })
+          .catch(error => console.error('Error saving vacancy:', error));
+      });
 
-      `;
-      tableBody.appendChild(row);
-          });
+      window.deleteVacancy = function (id) {
+        fetch(API_URL + '/' + id, {
+          method: 'DELETE'
         })
-        .catch(error => console.error('Error loading vacancies:', error));
-        // window.location.href = 'company-master.html';
-    }
-
-    form.addEventListener('submit', function(event) {
-      event.preventDefault();
-      console.log("Form submitted");
-      const vacancy = {
-        company: document.getElementById('company').value.trim(),
-        role: document.getElementById('role').value.trim(),
-        industry: document.getElementById('industry').value.trim(),
-        description: document.getElementById('description').value.trim(),
-        location: document.getElementById('location').value.trim()
+          .then(() => {
+            loadVacancies();
+          })
+          .catch(error => console.error('Error deleting vacancy:', error));
       };
 
-      fetch(API_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(vacancy)
-      })
-      .then(res => {
-        if (!res.ok) throw new Error('Failed to save vacancy');
-        return res.json();
-      })
-      .then(data => {
-        console.log('Vacancy added:', data);
-        // addRow(data);
-        form.reset();
-        loadVacancies(); // Reload vacancies to show the new one
-      })
-      .catch(error => console.error('Error saving vacancy:', error));
-      console.log("Form submitted2");
-    }
-    
-  );
-
-    // function addRow(item) {
-      
-    // }
-    
-
-    function deleteVacancy(id) {
-  fetch(API_URL + '/' + id, {
-    method: 'DELETE'
-  })
-  .then(() => {
-    // btn.closest('tr').remove();
-    loadVacancies();
-  })
-  .catch(error => console.error('Error deleting vacancy:', error));
-}
-loadVacancies();
-      }
-    )();
+      loadVacancies();
+    })();
   </script>
-
 </body>
 </html>

@@ -77,7 +77,7 @@
           if (user) {
             // Storing the logged-in user data in sessionStorage
             sessionStorage.setItem("loggedInCandidate", JSON.stringify({
-              name: user.name,
+              name: user.username,
               email: user.email,
               type: user.type
             }));

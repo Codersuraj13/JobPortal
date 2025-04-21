@@ -26,19 +26,19 @@
         class="p-4 shadow-sm border rounded bg-light"
         novalidate
       >
-      <div class="row mb-3">
-        <div class="col-md-6">
-          <label for="candidateName" class="form-label">Candidate Name</label>
-          <input type="text" class="form-control" id="candidateName" required />
-          <div class="invalid-feedback">Please enter your name.</div>
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="candidateName" class="form-label">Candidate Name</label>
+            <input type="text" class="form-control" id="candidateName" required />
+            <div class="invalid-feedback">Please enter your name.</div>
+          </div>
+          <div class="col-md-6">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" required />
+            <div class="invalid-feedback">Please enter a valid email.</div>
+          </div>
         </div>
-        <div class="col-md-6">
-          <label for="email" class="form-label">Email</label>
-          <input type="email" class="form-control" id="email" required />
-          <div class="invalid-feedback">Please enter a valid email.</div>
-        </div>
-      </div>
-      
+
         <div class="row mb-3">
           <div class="col-md-6">
             <label for="jobTitle" class="form-label">Job Title</label>
@@ -54,7 +54,7 @@
 
         <div class="row mb-3">
           <div class="col-md-6">
-            <label for="location" class="form-label">Preferred Location</label>
+            <label for="location" class="form-label">Location</label>
             <input type="text" class="form-control" id="location" required />
             <div class="invalid-feedback">Enter preferred location.</div>
           </div>
@@ -64,6 +64,7 @@
             <div class="invalid-feedback">Enter your experience.</div>
           </div>
         </div>
+
         <div class="mb-3">
           <label for="appliedDate" class="form-label">Applied Date</label>
           <input type="date" class="form-control" id="appliedDate" required />
@@ -91,6 +92,7 @@
 
       <div id="message" class="mt-3"></div>
     </div>
+
     <script>
       (function () {
         const apiUrl = "http://localhost:3000/applications";
@@ -106,14 +108,22 @@
         const linkedinInput = document.getElementById("linkedin");
         const messageDiv = document.getElementById("message");
 
-        // Autofill fields from URL parameters
+        
+        const loggedInCandidate = JSON.parse(sessionStorage.getItem("loggedInCandidate"));
+
+        if (loggedInCandidate && loggedInCandidate.type === "candidate") {
+          candidateNameInput.value = loggedInCandidate.name || "";
+          emailInput.value = loggedInCandidate.email || "";
+        }
+
+        
         const params = new URLSearchParams(window.location.search);
         const jobTitle = params.get("jobTitle");
 
         if (jobTitle) {
           jobTitleInput.value = jobTitle;
 
-          // Optional: fetch company name from vacancies if needed
+          
           fetch(`http://localhost:3000/vacancies?role=${jobTitle}`)
             .then((res) => res.json())
             .then((data) => {
@@ -153,27 +163,22 @@
             /^https:\/\/(www\.)?linkedin\.com\/in\/[A-z0-9_-]+\/?$/;
           if (!linkedinRegex.test(linkedinInput.value.trim())) {
             linkedinInput.classList.add("is-invalid");
-            console.warn("LinkedIn URL invalid:", linkedinInput.value);
             isValid = false;
           }
-          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(emailInput.value.trim())) {
-          emailInput.classList.add("is-invalid");
-          isValid = false;
-           }
 
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(emailInput.value.trim())) {
+            emailInput.classList.add("is-invalid");
+            isValid = false;
+          }
 
           return isValid;
         }
 
         form.addEventListener("submit", function (e) {
           e.preventDefault();
-          console.log("Form submission triggered");
 
-          if (!validateForm()) {
-            console.warn("Form validation failed");
-            return;
-          }
+          if (!validateForm()) return;
 
           const application = {
             candidateName: candidateNameInput.value.trim(),
@@ -186,44 +191,33 @@
             linkedin: linkedinInput.value.trim(),
           };
 
-          console.log("Application data to submit:", application);
-
-          // Check for duplicate before saving
+         
           fetch(
             `${apiUrl}?jobTitle=${application.jobTitle}&companyName=${application.companyName}`
           )
-            .then((res) => {
-              console.log("Duplicate check status:", res.status);
-              return res.json();
-            })
+            .then((res) => res.json())
             .then((data) => {
               if (data.length > 0) {
                 alert("You have already applied for this job at this company.");
-                console.warn("Duplicate application detected:", data);
                 return;
               }
 
-              // Submit new application
+             
               fetch(apiUrl, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(application),
               })
                 .then((response) => {
-                  console.log("POST response status:", response.status);
                   if (!response.ok)
                     throw new Error("Failed to add application.");
                   return response.json();
                 })
-                .then((result) => {
-                  console.log("Application saved:", result);
+                .then(() => {
                   form.reset();
                   form.classList.remove("was-validated");
-                  //  messageDiv.innerHTML = `<div class="alert alert-success">Application submitted successfully!</div>`;
-                    window.location.href = "/Candidate.html"; // or correct path
-                  
+                  window.location.href = "/Candidate.html";
                 })
-
                 .catch((error) => {
                   console.error("POST error:", error);
                   messageDiv.innerHTML = `<div class="alert alert-danger">Failed to submit application. Please try again.</div>`;

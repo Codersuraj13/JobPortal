@@ -76,7 +76,7 @@
 <div class="container container-box">
   <h3 class="mb-4"><i class="fa fa-users me-2"></i> Job-wise Applicant List</h3>
 
-  <!-- Job Dropdown -->
+  
   <div class="mb-4">
     <label for="jobSelect" class="form-label">Select Job Title:</label>
     <select class="form-select" id="jobSelect">
@@ -88,7 +88,7 @@
     </select>
   </div>
 
-  <!-- Applicant Table -->
+  
   <div class="table-responsive">
     <table class="table table-hover align-middle">
       <thead>
@@ -103,7 +103,7 @@
         </tr>
       </thead>
       <tbody id="applicantTable">
-        <!-- Applicants will be dynamically added here -->
+       
       </tbody>
     </table>
   </div>
@@ -114,7 +114,7 @@
   const applicantTable = document.getElementById("applicantTable");
   const jobSelect = document.getElementById("jobSelect");
 
-  // Fetch and display applicants
+  
   async function loadApplicants(jobFilter = "") {
     try {
       const res = await fetch("http://localhost:3000/applications");
@@ -159,13 +159,13 @@
     }
   }
 
-  // Filter on dropdown change
+  
   jobSelect.addEventListener("change", () => {
     const selectedJob = jobSelect.value;
     loadApplicants(selectedJob);
   });
 
-  // Handle Accept/Reject button
+
   function handleAction(button, status, applicationId) {
     const row = button.closest("tr");
     const statusCell = row.querySelector(".status-cell");
@@ -174,10 +174,10 @@
       ? '<span class="badge bg-success">Accepted</span>'
       : '<span class="badge bg-danger">Rejected</span>';
 
-    // Update badge
+   
     statusCell.innerHTML = statusBadge;
 
-    // Update database
+  
     fetch(`http://localhost:3000/applications/${applicationId}`)
       .then(res => res.json())
       .then(app => {
@@ -194,7 +194,7 @@
       .catch(err => console.error("Error updating status:", err));
   }
 
-  // Initial load
+  
   loadApplicants();
 //})();
 </script>

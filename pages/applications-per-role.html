@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applications per Role</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        #chartContainer {
+            width: 70%;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <h4 class="text-center">Applications per Role</h4>
+    <hr>
+    <div id="chartContainer">
+        <canvas id="applicationsRoleChart"></canvas>
+    </div>
+    <script>
+        (function () {
+          
+            fetch('../json/db.json')
+                .then(response => response.json())
+                .then(data => {
+                    
+                    const roleCounts = {};
+
+                    data.applications.forEach(app => {
+                        const role = app.jobTitle;
+                        if (roleCounts[role]) {
+                            roleCounts[role]++;
+                        } else {
+                            roleCounts[role] = 1;
+                        }
+                    });
+
+                    console.log("Applications per role:", roleCounts);
+
+                   
+                    const roles = Object.keys(roleCounts);
+                    const counts = Object.values(roleCounts);
+
+                   
+                    const colors = [
+                        '#4CAF50', '#F44336', '#FFC107', '#2196F3', '#9C27B0', '#FF5722', '#00BCD4', '#8BC34A'
+                    ];
+
+                    
+                    const ctx = document.getElementById('applicationsRoleChart').getContext('2d');
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: roles,
+                            datasets: [{
+                                label: 'Number of Applications',
+                                data: counts,
+                                backgroundColor: colors.slice(0, roles.length) 
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    display: false
+                                }
+                            },
+                            scales: {
+                                x: {
+                                    title: {
+                                        display: true,
+                                        text: 'Roles'
+                                    }
+                                },
+                                y: {
+                                    title: {
+                                        display: true,
+                                        text: 'Number of Applications'
+                                    },
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        })();
+    </script>
+</body>
+</html>

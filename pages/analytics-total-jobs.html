@@ -1,80 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Vacancy Analysis</title>
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-  />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Applications Status Overview</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    #chartContainer {
+      width: 50%;
+      margin: 0 auto;
+    }
+  </style>
 </head>
-<body class="bg-light">
-  <div class="container mt-5">
-    <h2 class="text-center mb-4">Vacancies Per Company</h2>
-    <canvas id="vacancyChart" height="100"></canvas>
+<body>
+  <h4 class="text-center">Applications Status Overview</h4>
+  <hr>
+  <div id="chartContainer">
+    <canvas id="applicationsChart"></canvas>
   </div>
-
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      fetch("http://localhost:3000/vacancies")
-        .then(response => {
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-          return response.json();
-        })
-        .then(vacancies => {
-          // Process vacancy data
-          const vacancyCount = {};
-          vacancies.forEach(vacancy => {
-            const company = vacancy.company.toLowerCase();
-            vacancyCount[company] = (vacancyCount[company] || 0) + 1;
+    (function () {
+      
+      fetch('../json/db.json')
+        .then(response => response.json())
+        .then(data => {
+         
+          const statusCounts = {
+            Accepted: 0,
+            Rejected: 0,
+            Pending: 0
+          };
+
+          data.applications.forEach(app => {
+            if (app.status === "Accepted") {
+              statusCounts.Accepted++;
+            } else if (app.status === "Rejected") {
+              statusCounts.Rejected++;
+            } else {
+              statusCounts.Pending++;
+            }
           });
 
-          const companies = Object.keys(vacancyCount);
-          const counts = Object.values(vacancyCount);
+          console.log("Status counts:", statusCounts);
 
-          // Create bar chart
-          const ctx = document.getElementById('vacancyChart').getContext('2d');
+         
+          const ctx = document.getElementById('applicationsChart').getContext('2d');
           new Chart(ctx, {
-            type: 'bar',
+            type: 'pie',
             data: {
-              labels: companies.map(c => c.charAt(0).toUpperCase() + c.slice(1)),
+              labels: ['Accepted', 'Rejected', 'Pending'],
               datasets: [{
-                label: 'Number of Vacancies',
-                data: counts,
-                backgroundColor: 'rgba(54, 162, 235, 0.7)',
-                borderColor: 'rgba(54, 162, 235, 1)',
-                borderWidth: 1,
-                borderRadius: 8
+                label: 'Application Status',
+                data: [statusCounts.Accepted, statusCounts.Rejected, statusCounts.Pending],
+                backgroundColor: ['#4CAF50', '#F44336', '#FFC107']
               }]
             },
             options: {
               responsive: true,
               plugins: {
-                legend: { display: false },
-                tooltip: {
-                  callbacks: {
-                    label: context => `${context.parsed.y} vacancy(ies)`
-                  }
-                }
-              },
-              scales: {
-                y: {
-                  beginAtZero: true,
-                  stepSize: 1
+                legend: {
+                  position: 'top'
                 }
               }
             }
           });
         })
-        .catch(error => {
-          console.error("Error fetching vacancies:", error);
-          alert("Failed to fetch data. Make sure JSON Server is running.");
-        });
-    });
+        .catch(error => console.error('Error fetching data:', error));
+    })();
   </script>
 </body>
 </html>

@@ -23,6 +23,14 @@
       "email": "omkar@gmail.com",
       "mobile": "8966456342",
       "type": "candidate"
+    },
+    {
+      "id": "ac92",
+      "username": "varun",
+      "password": "Varun@1234",
+      "email": "varun@gmail.com",
+      "mobile": "8966456342",
+      "type": "candidate"
     }
   ],
   "applications": [
@@ -35,18 +43,6 @@
       "location": "Mumbai",
       "experience": "1",
       "appliedDate": "2025-04-21",
-      "linkedin": "https://www.linkedin.com/in/suraj",
-      "status": "Accepted"
-    },
-    {
-      "id": "1df4",
-      "candidateName": "omkar",
-      "email": "omkar@gmail.com",
-      "jobTitle": "Software Developer",
-      "companyName": "uber",
-      "location": "Mumbai",
-      "experience": "3",
-      "appliedDate": "2025-04-08",
       "linkedin": "https://www.linkedin.com/in/suraj",
       "status": "Rejected"
     },
@@ -71,6 +67,65 @@
       "location": "Bangalore",
       "experience": "3",
       "appliedDate": "2025-04-14",
+      "linkedin": "https://www.linkedin.com/in/suraj",
+      "status": "Rejected"
+    },
+    {
+      "id": "e7b0",
+      "candidateName": "omkar",
+      "email": "omkar@gmail.com",
+      "jobTitle": "Software Developer",
+      "companyName": "khoih",
+      "location": "Mumbai",
+      "experience": "3",
+      "appliedDate": "2025-04-15",
+      "linkedin": "https://www.linkedin.com/in/suraj",
+      "status": "Accepted"
+    },
+    {
+      "id": "7070",
+      "candidateName": "omkar",
+      "email": "omkar@gmail.com",
+      "jobTitle": "Frontend Developer",
+      "companyName": "mini",
+      "location": "Bangalore",
+      "experience": "4",
+      "appliedDate": "2025-04-03",
+      "linkedin": "https://www.linkedin.com/in/suraj",
+      "status": "Rejected"
+    },
+    {
+      "id": "f7e1",
+      "candidateName": "Rohit",
+      "email": "rohit@gmail.com",
+      "jobTitle": "Software Developer",
+      "companyName": "inf",
+      "location": "Mumbai",
+      "experience": "4",
+      "appliedDate": "2025-04-10",
+      "linkedin": "https://www.linkedin.com/in/suraj"
+    },
+    {
+      "id": "48ad",
+      "candidateName": "rohit",
+      "email": "rohit@gmail.com",
+      "jobTitle": "Frontend Engineer",
+      "companyName": "LTIMindtree",
+      "location": "Pune",
+      "experience": "3",
+      "appliedDate": "2025-04-20",
+      "linkedin": "https://www.linkedin.com/in/suraj",
+      "status": "Accepted"
+    },
+    {
+      "id": "aaad",
+      "candidateName": "varun",
+      "email": "varun@gmail.com",
+      "jobTitle": "Frontend Engineer",
+      "companyName": "Mindtree",
+      "location": "Pune",
+      "experience": "5",
+      "appliedDate": "2025-04-11",
       "linkedin": "https://www.linkedin.com/in/suraj"
     }
   ],
@@ -90,6 +145,22 @@
       "industry": "Information Technology",
       "description": "Specialization in Java",
       "location": "Bangalore"
+    },
+    {
+      "id": "c49e",
+      "company": "tcs",
+      "role": "Tester",
+      "industry": "Education",
+      "description": "c++",
+      "location": "Chennai"
+    },
+    {
+      "id": "362c",
+      "company": "LTIMindtree",
+      "role": "Frontend Engineer",
+      "industry": "Finance",
+      "description": "Specialization in Java SpringBoot",
+      "location": "Pune"
     }
   ],
   "accepted": [],

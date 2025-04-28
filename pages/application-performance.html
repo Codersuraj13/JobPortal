@@ -18,21 +18,18 @@
     <div id="chartContainer">
         <canvas id="statusChart" width="400" height="400"></canvas>
     </div>
+   
     <script>
+        
         (function () {
             
             const loggedInUser = JSON.parse(sessionStorage.getItem("loggedInCandidate"));
             const loggedInUserEmail = loggedInUser ? loggedInUser.email : null;
 
-            if (!loggedInUserEmail) {
-                console.error('No logged-in user email found in sessionStorage.');
-                return;
-            }
-
             console.log("Logged-in user email:", loggedInUserEmail);
 
            
-            fetch('../json/db.json')
+            fetch('/json/db.json')
                 .then(response => response.json())
                 .then(data => {
                     const applications = data.applications.filter(app => app.email === loggedInUserEmail);

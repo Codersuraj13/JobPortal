@@ -120,6 +120,8 @@
         const params = new URLSearchParams(window.location.search);
         const jobTitle = params.get("jobTitle");
 
+        console.log(params);
+
         if (jobTitle) {
           jobTitleInput.value = jobTitle;
 
@@ -210,7 +212,6 @@
               })
                 .then((response) => {
                   if (!response.ok)
-                    throw new Error("Failed to add application.");
                   return response.json();
                 })
                 .then(() => {

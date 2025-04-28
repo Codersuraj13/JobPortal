@@ -103,7 +103,7 @@
     </div>
 
     <script>
-      
+      (function (){
       const loggedInCandidate = JSON.parse(sessionStorage.getItem('loggedInCandidate'));
 
       
@@ -116,28 +116,20 @@
       let applicationsData = [];
 
      
-      async function fetchApplications() {
-        try {
-          
-          const response = await fetch("http://localhost:3000/applications");
-          const data = await response.json();
-
-          
-          console.log('Fetched Applications:', data);
-
-          
-          applicationsData = data.filter(app => app.email === loggedInCandidate.email);
-          console.log('Filtered Applications for logged-in user:', applicationsData);
-
-         
-          displayApplications(applicationsData);
-        } catch (error) {
-          console.error("Error fetching applications:", error);
-        }
+      function fetchApplications() {
+        fetch("http://localhost:3000/applications")
+          .then(response => response.json())
+          .then(data => {
+            console.log('Fetched Applications:', data);
+            applicationsData = data.filter(app => app.email === loggedInCandidate.email);
+            console.log('Filtered Applications for logged-in user:', applicationsData);
+            displayApplications(applicationsData);
+          })
+          .catch(error => console.error("Error fetching applications:", error));
       }
 
      
-      function displayApplications(applications) {
+     window.displayApplications=function(applications) {
         const tbody = document.getElementById("applicationsTableBody");
         const total = document.getElementById("totalApplications");
         tbody.innerHTML = "";
@@ -177,28 +169,27 @@
       }
 
       
-      async function deleteApplication(applicationId) {
+      window.deleteApplication=function (applicationId) {
         console.log("Deleting application with ID:", applicationId);
         
        
-        try {
-          const response = await fetch(`http://localhost:3000/applications/${applicationId}`, {
-            method: 'DELETE'
-          });
-          if (response.ok) {
-           
-            applicationsData = applicationsData.filter(app => app.id !== applicationId);
-            displayApplications(applicationsData);
-          } else {
-            console.error("Failed to delete application");
-          }
-        } catch (error) {
-          console.error("Error deleting application:", error);
-        }
+        
+        fetch(`http://localhost:3000/applications/${applicationId}`, {
+          method: 'DELETE'
+        })
+          .then(response => {
+            if (response.ok) {
+              applicationsData = applicationsData.filter(app => app.id !== applicationId);
+              displayApplications(applicationsData);
+            } else {
+              console.error("Failed to delete application");
+            }
+          })
+          .catch(error => console.error("Error deleting application:", error));
       }
 
      
-      function filterApplications() {
+      window.filterApplications=function() {
         const searchQuery = document.getElementById("searchInput").value.toLowerCase();
         const filteredApplications = applicationsData.filter(app => 
           app.jobTitle.toLowerCase().includes(searchQuery) || 
@@ -209,6 +200,7 @@
 
       
       fetchApplications();
+      })();
     </script>
   </body>
 </html>

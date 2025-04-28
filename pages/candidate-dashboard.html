@@ -10,16 +10,15 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
   <style>
     .opportunities-card {
-      background-color: #f8f9fa; /* Light gray background */
+      background-color: #f8f9fa;
       border-radius: 10px;
       box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
       padding: 20px;
     }
 
     .opportunities-card h5 {
-      color: #343a40; /* Dark gray text */
+      color: #343a40;
       font-weight: bold;
-      text-transform: uppercase;
       letter-spacing: 1px;
     }
 
@@ -32,23 +31,21 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     .opportunities-list-item:hover {
-      transform: translateY(-3px);
       box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
-      background-color: #e9ecef; /* Light hover effect */
+      background-color: #e9ecef; 
     }
 
     .opportunities-list-item span:first-child {
       font-weight: 600;
-      color: #495057; /* Darker gray for text */
+      color: #495057;
     }
 
     .opportunities-list-item .badge {
       font-size: 0.9rem;
-      background-color: #17a2b8; /* Teal badge */
+      background-color: #17a2b8; 
       color: #ffffff;
     }
   </style>
@@ -57,16 +54,11 @@
 
 <div class="container py-4" id="main-content">
   <h2 class="mb-4" id="welcome-message">Welcome, candidate!</h2>
-
-  <!-- Job Opportunities Section -->
   <div class="opportunities-card mt-4">
     <h5>Job Opportunities</h5>
     <ul class="list-group" id="opportunities-list">
-      <!-- Dynamic list items will be appended here -->
     </ul>
   </div>
-
-  
   <div class="mt-5">
     <h5>Quick Tips to Get Hired:</h5>
     <ul class="list-group">
@@ -79,6 +71,7 @@
 
 
 <script>
+  ( function (){
   console.log("loaded");
   console.log("Script loaded and running");
 
@@ -86,21 +79,20 @@
   console.log("Session Data:", userData);
 
   if (userData) {
-    try {
-      const parsedData = JSON.parse(userData);
-      console.log("Parsed Data:", parsedData);
+    
+      const uData = JSON.parse(userData);
+      console.log(" Data:", uData);
 
-      if (parsedData.type === "candidate" && parsedData.name) {
-        document.getElementById("welcome-message").innerText = `Welcome, ${parsedData.name}!`;
+      if (uData.type === "candidate" && uData.name) {
+        document.getElementById("welcome-message").innerText = `Welcome, ${uData.name}!`;
 
-        // Fetch vacancies from db.json
-        fetch('../json/db.json')
+        
+        fetch('/json/db.json')
           .then(response => response.json())
           .then(data => {
-            const vacancies = data.vacancies || [];
+            const vacancies = data.vacancies ;
             const opportunitiesList = document.getElementById("opportunities-list");
 
-            // Populate the job opportunities list
             vacancies.forEach(vacancy => {
               const listItem = document.createElement("li");
               listItem.className = "opportunities-list-item";
@@ -115,13 +107,9 @@
       } else {
         document.getElementById("welcome-message").innerText = "Welcome, Candidate!";
       }
-    } catch (error) {
-      console.error("Error parsing session data:", error);
-      document.getElementById("welcome-message").innerText = "Welcome, Candidate!";
-    }
-  } else {
-    document.getElementById("welcome-message").innerText = "Welcome, Candidate!";
   }
+  
+    })();
 </script>
 
 

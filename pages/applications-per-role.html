@@ -12,6 +12,7 @@
         }
     </style>
 </head>
+
 <body>
     <h4 class="text-center">Applications per Role</h4>
     <hr>
@@ -21,7 +22,7 @@
     <script>
         (function () {
           
-            fetch('../json/db.json')
+            fetch('/json/db.json')
                 .then(response => response.json())
                 .then(data => {
                     

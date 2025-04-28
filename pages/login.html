@@ -75,14 +75,11 @@
         .then(users => {
           const user = users.find(u => u.email === email && u.password === password);
           if (user) {
-            // Storing the logged-in user data in sessionStorage
             sessionStorage.setItem("loggedInCandidate", JSON.stringify({
               name: user.username,
               email: user.email,
               type: user.type
             }));
-
-            // Redirect based on user type
             if (user.type === "admin") {
               window.location.href = "/Admin.html";
             } else {

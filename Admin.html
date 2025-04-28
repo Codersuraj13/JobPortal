@@ -19,37 +19,19 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarColor01">
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="#">Home
-            <span class="visually-hidden">(current)</span>
-          </a>
-        </li>
-  
-        <li class="nav-item">
-          <a class="nav-link" href="#">Services</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">About</a>
-        </li>
-      </ul>
-      <form class="d-flex">
-        <input class="form-control me-sm-2" type="search" placeholder="Search">
-        <button type="submit" class="btn btn-info my-2 my-sm-0">Search</button>
-      </form>
+    
      
         <div class="dropdown ms-2">
-          <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown">
+          <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" id="userDropdown">
             <i class="fa fa-user"></i> Login
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" href="/Job Portal Project/pages/log-in.html"><i class="fa fa-sign-in-alt me-2"></i>Log In</a></li>
-            <li><a class="dropdown-item" href="job-seeker-registration.html"><i class="fa fa-user-plus me-2"></i>Sign Up</a></li>
+            <li><a class="dropdown-item" href="/pages/login.html"><i class="fa fa-sign-in-alt me-2"></i>Log In</a></li>
+            <li><a class="dropdown-item" href="/pages/RegistrationForm.html"><i class="fa fa-user-plus me-2"></i>Sign Up</a></li>
           </ul>
         </div>
         
-      </div>
+      
       
         <ul class="dropdown-menu dropdown-menu-end">
           <li><a class="dropdown-item" href="#">Profile</a></li>
@@ -98,7 +80,7 @@
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-white"  href="#profile">
+        <a href="#" class="nav-link text-white" onclick="loadPage('profile.html')" >
           <i class="fa fa-cog me-2"></i> Profile
         </a>
       </li>
@@ -180,33 +162,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script >
-//   function loadPage(page) {
-//     fetch(`pages/${page}`)
-//         .then(response => response.text())
-//         .then(data => {
-//             const container = document.getElementById('main-content');
-//             container.innerHTML = data;
-
-//             
-//             const scripts = container.querySelectorAll('script');
-//             scripts.forEach(script => {
-//                 const newScript = document.createElement('script');
-//                 if (script.src) {
-//                     newScript.src = script.src;
-//                 } else {
-//                     newScript.textContent = script.textContent;
-//                 }
-//                 document.body.appendChild(newScript);
-//                 script.remove(); 
-//             });
-//             sessionStorage.setItem("lastPage", page);
-//         })
-//         .catch(err => {
-//             document.getElementById('main-content').innerHTML =
-//                 '<p class="text-danger">Failed to load content.</p>';
-//             console.error(err);
-//         });
-// }
 function loadPage(page) {
   fetch(`pages/${page}`)
     .then(response => response.text())
@@ -251,7 +206,7 @@ function loadPage(page) {
         method: 'DELETE'
       })
         .then(res => {
-          if (!res.ok) throw new Error('Failed to delete vacancy');
+          if (!res.ok)
           button.closest('tr').remove();
         })
         .catch(error => console.error('Error deleting vacancy:', error));
@@ -265,6 +220,23 @@ function loadPage(page) {
       loadPage("admin-dashboard.html");
     }
   }
+
+  const loggedInCandidate = sessionStorage.getItem("loggedInCandidate");
+    const userDropdown = document.getElementById("userDropdown");
+    const candidateProfileLink = document.getElementById("candidateProfileLink");
+    const logoutLink = document.getElementById("logoutLink");
+
+    if (loggedInCandidate) {
+      const candidateData = JSON.parse(loggedInCandidate);
+      userDropdown.innerHTML = `<i class="fa fa-user"></i> Welcome, ${candidateData.name}`;
+      candidateProfileLink.style.display = 'block';
+      logoutLink.style.display = 'block';
+    } else {
+      
+      userDropdown.innerHTML = '<i class="fa fa-user"></i> Login';
+      candidateProfileLink.style.display = 'none';
+      logoutLink.style.display = 'none';
+    }
 
   function logout() {
     sessionStorage.clear();

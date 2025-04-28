@@ -79,13 +79,11 @@
       const form = document.getElementById('companyForm');
       const tableBody = document.getElementById('companyTableBody');
       const API_URL = 'http://localhost:3000/vacancies';
+      let editingId = null;
 
       function loadVacancies() {
         fetch(API_URL)
-          .then(res => {
-            if (!res.ok) throw new Error('Failed to fetch vacancies');
-            return res.json();
-          })
+          .then(res => res.json())
           .then(data => {
             tableBody.innerHTML = '';
             data.forEach(item => {
@@ -96,7 +94,10 @@
                 <td>${item.industry}</td>
                 <td>${item.description}</td>
                 <td>${item.location}</td>
-                <td><button type="button" class="btn btn-sm btn-danger" onclick="deleteVacancy('${item.id}', this)">Delete</button></td>
+                <td>
+                  <button type="button" class="btn btn-sm btn-success me-1" onclick="updateVacancy('${item.id}')">Update</button>
+                  <button type="button" class="btn btn-sm btn-danger" onclick="deleteVacancy('${item.id}')">Delete</button>
+                </td>
               `;
               tableBody.appendChild(row);
             });
@@ -114,32 +115,52 @@
           location: document.getElementById('location').value
         };
 
-        fetch(API_URL, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(vacancy)
-        })
-          .then(res => {
-            if (!res.ok) throw new Error('Failed to save vacancy');
-            return res.json();
+        if (editingId) {
+          fetch(`${API_URL}/${editingId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(vacancy)
           })
-          .then(data => {
-            form.reset();
-            loadVacancies();
+            .then(res => res.json())
+            .then(() => {
+              editingId = null;
+              form.reset();
+              loadVacancies();
+            })
+            .catch(error => console.error('Error updating vacancy:', error));
+        } else {
+          fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(vacancy)
           })
-          .catch(error => console.error('Error saving vacancy:', error));
+            .then(res => res.json())
+            .then(() => {
+              form.reset();
+              loadVacancies();
+            })
+            .catch(error => console.error('Error saving vacancy:', error));
+        }
       });
 
       window.deleteVacancy = function (id) {
-        fetch(API_URL + '/' + id, {
-          method: 'DELETE'
-        })
-          .then(() => {
-            loadVacancies();
-          })
+        fetch(`${API_URL}/${id}`, { method: 'DELETE' })
+          .then(() => loadVacancies())
           .catch(error => console.error('Error deleting vacancy:', error));
+      };
+
+      window.updateVacancy = function (id) {
+        fetch(`${API_URL}/${id}`)
+          .then(res => res.json())
+          .then(data => {
+            document.getElementById('company').value = data.company;
+            document.getElementById('role').value = data.role;
+            document.getElementById('industry').value = data.industry;
+            document.getElementById('description').value = data.description;
+            document.getElementById('location').value = data.location;
+            editingId = id;
+          })
+          .catch(error => console.error('Error fetching vacancy for update:', error));
       };
 
       loadVacancies();

@@ -35,18 +35,6 @@
   ],
   "applications": [
     {
-      "id": "96cd",
-      "candidateName": "rohit",
-      "email": "rohit@gmail.com",
-      "jobTitle": "Software Developer",
-      "companyName": "infosys",
-      "location": "Mumbai",
-      "experience": "1",
-      "appliedDate": "2025-04-21",
-      "linkedin": "https://www.linkedin.com/in/suraj",
-      "status": "Rejected"
-    },
-    {
       "id": "92d9",
       "candidateName": "omkar",
       "email": "omkar@gmail.com",
@@ -127,24 +115,27 @@
       "experience": "5",
       "appliedDate": "2025-04-11",
       "linkedin": "https://www.linkedin.com/in/suraj"
+    },
+    {
+      "id": "b559",
+      "candidateName": "rohit",
+      "email": "rohit@gmail.com",
+      "jobTitle": "Software Developer",
+      "companyName": "infosys",
+      "location": "Mumbai",
+      "experience": "3",
+      "appliedDate": "2025-04-22",
+      "linkedin": "https://www.linkedin.com/in/suraj"
     }
   ],
   "vacancies": [
     {
-      "id": "075d",
-      "company": "infosys",
-      "role": "Software Developer",
-      "industry": "Information Technology",
-      "description": "Specialization in Java",
-      "location": "Mumbai"
-    },
-    {
-      "id": "4573",
       "company": "Capgemini",
       "role": "Frontend Developer",
       "industry": "Information Technology",
       "description": "Specialization in Java",
-      "location": "Bangalore"
+      "location": "Bangalore",
+      "id": "4573"
     },
     {
       "id": "c49e",
@@ -161,8 +152,14 @@
       "industry": "Finance",
       "description": "Specialization in Java SpringBoot",
       "location": "Pune"
+    },
+    {
+      "company": "infosys",
+      "role": "Software Developer",
+      "industry": "Information Technology",
+      "description": ".NET Developer",
+      "location": "Mumbai",
+      "id": "d133"
     }
-  ],
-  "accepted": [],
-  "rejected": []
+  ]
 }

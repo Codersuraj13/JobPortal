@@ -60,7 +60,7 @@
     const searchBtn = document.getElementById('searchBtn');
     let allJobs = [];
 
-    // Fetch and display all jobs on page load
+    
     fetch(API_URL)
       .then(res => res.json())
       .then(jobs => {
@@ -72,7 +72,7 @@
         jobsContainer.innerHTML = '<p class="text-danger text-center">Failed to load jobs.</p>';
       });
 
-    // Function to display jobs
+   
     function displayJobs(jobs) {
       jobsContainer.innerHTML = '';
 
@@ -103,20 +103,13 @@
       });
     }
 
-    // 🔍 Search functionality
+   
     searchBtn.addEventListener('click', () => {
       const query = searchInput.value.trim().toLowerCase();
       const filteredJobs = allJobs.filter(job =>
         job.role.toLowerCase().includes(query) || job.company.toLowerCase().includes(query)
       );
       displayJobs(filteredJobs);
-    });
-
-    // Optional: Trigger search on Enter key
-    searchInput.addEventListener('keyup', (e) => {
-      if (e.key === 'Enter') {
-        searchBtn.click();
-      }
     });
   })();
 

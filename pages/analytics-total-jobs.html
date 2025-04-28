@@ -18,10 +18,11 @@
   <div id="chartContainer">
     <canvas id="applicationsChart"></canvas>
   </div>
+  
   <script>
     (function () {
       
-      fetch('../json/db.json')
+      fetch('/json/db.json')
         .then(response => response.json())
         .then(data => {
          
